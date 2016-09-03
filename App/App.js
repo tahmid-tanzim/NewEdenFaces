@@ -1,43 +1,42 @@
 import React from 'react';
-import Widget from './Widget';
+import ReactDOM from 'react-dom';
+import Slider from './Slider';
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: '',
-            age: 0
+            red: 0,
+            blue: 0,
+            green: 0
         };
-        this.update = this.updateName.bind(this);
+        this.update = this.updateColor.bind(this);
     }
 
-    updateName(e) {
+    updateColor(e) {
         this.setState({
-            name: e.target.value
+            red: ReactDOM.findDOMNode(this.refs.red.refs.colorInput).value,
+            blue: ReactDOM.findDOMNode(this.refs.blue.refs.colorInput).value,
+            green: ReactDOM.findDOMNode(this.refs.green.refs.colorInput).value
         });
     }
 
     render() {
         //const {name, age} = this.props;
-        const {name, age} = this.state;
+        const {red, blue, green} = this.state;
         return (
             <div>
-            <Widget name={name}
-                    age={age}
-                    update={this.update} />
-                <p>Lorem Ipsum 2 Ipsum Lorem Ipsum</p>
+                <Slider ref="red"
+                        update={this.update}/>
+                {red} <br />
+                <Slider ref="blue"
+                        update={this.update}/>
+                {blue} <br />
+                <Slider ref="green"
+                        update={this.update}/>
+                {green} <br />
             </div>
         );
     }
 }
-
-//App.propTypes = {
-//    name: React.PropTypes.string,
-//    age: React.PropTypes.number.isRequired
-//};
-//
-//App.defaultProps = {
-//    name: 'Unknown',
-//    age: 0
-//};
 
 export default App;
