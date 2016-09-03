@@ -1,28 +1,29 @@
 import React from 'react';
-
+import Widget from './Widget';
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: 'Hello World',
-            age: 100
-        }
+            name: '',
+            age: 0
+        };
+        this.update = this.updateName.bind(this);
     }
-    update(e) {
+
+    updateName(e) {
         this.setState({
             name: e.target.value
         });
     }
+
     render() {
         //const {name, age} = this.props;
         const {name, age} = this.state;
         return (
             <div>
-                <input type="text"
-                       onChange={this.update.bind(this)} />
-                <hr/>
-                <h2>Hello</h2>
-                <h4>{name} <small>{age}</small></h4>
+            <Widget name={name}
+                    age={age}
+                    update={this.update} />
                 <p>Lorem Ipsum 2 Ipsum Lorem Ipsum</p>
             </div>
         );
